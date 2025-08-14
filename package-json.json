@@ -1,25 +1,15 @@
 {
-  "name": "sms-sender-app",
+  "name": "cuchen-sms",
   "version": "1.0.0",
-  "description": "Secure SMS sending application powered by Twilio and Vercel",
-  "author": "Your Name",
-  "license": "MIT",
+  "description": "Cuchen SMS System",
+  "type": "module",
   "scripts": {
-    "dev": "vercel dev",
-    "deploy": "vercel --prod",
-    "logs": "vercel logs"
+    "vercel-build": "npm install twilio"
   },
   "dependencies": {
     "twilio": "^4.19.0"
   },
   "engines": {
-    "node": ">=14.0.0"
-  },
-  "keywords": [
-    "sms",
-    "twilio",
-    "vercel",
-    "serverless",
-    "messaging"
-  ]
-    
+    "node": ">=18.0.0"
+  }
+}
