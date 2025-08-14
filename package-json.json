@@ -1,0 +1,25 @@
+{
+  "name": "sms-sender-app",
+  "version": "1.0.0",
+  "description": "Secure SMS sending application powered by Twilio and Vercel",
+  "author": "Your Name",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod",
+    "logs": "vercel logs"
+  },
+  "dependencies": {
+    "twilio": "^4.19.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "sms",
+    "twilio",
+    "vercel",
+    "serverless",
+    "messaging"
+  ]
+    
