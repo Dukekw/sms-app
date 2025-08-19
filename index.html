@@ -141,24 +141,59 @@
     <div id="notificationContainer"></div>
 
     <script>
-        // Message Templates Database - Cuchen Specific
+        // Updated Message Templates Database - Updated per request
         const messageTemplates = [
             {
                 id: 1,
-                name: "Repair Welcome Message",
+                name: "Receipt Confirmation / Notice",
                 category: "Initial Contact",
-                content: "Hi {{customerName}}, thanks for choosing Cuchen! We'll send you text updates about your repair progress and final costs. Questions? Call us at 888-742-2588. Reply STOP to opt out anytime.",
-                variables: ["customerName"]
+                content: "[CuchenCustomerService Automated Message] Your repair request has been successfully received. For inquiries, please contact 888-742-2588.",
+                variables: []
             },
             {
                 id: 2,
-                name: "Repair Complete",
-                category: "Completion",
-                content: "Hi {{customerName}}, your repair is complete! Total cost: ${{repairCost}} (repair) + ${{shippingCost}} (shipping) = ${{total}}. {{pickupShippingInstructions}}. Payment options: {{paymentMethods}}. Questions? Call 888-742-2588. Reply STOP to opt out.",
-                variables: ["customerName", "repairCost", "shippingCost", "total", "pickupShippingInstructions", "paymentMethods"]
+                name: "Cost Notice",
+                category: "Pricing",
+                content: "[CuchenCustomerService Automated Message] Total estimated A/S cost: ${{repairCost}} / Shipping fee: ${{shippingFee}} For inquiries, please contact 888-742-2588.",
+                variables: ["repairCost", "shippingFee"]
             },
             {
                 id: 3,
+                name: "Carry-in Customer Location Notice - West",
+                category: "Location",
+                content: "[CuchenCustomerService Automated Message] WEST CENTER 10395 Slusher Dr. #2, Santa Fe Springs, CA 90670 For inquiries, please contact 888-742-2588.",
+                variables: []
+            },
+            {
+                id: 4,
+                name: "Carry-in Customer Location Notice - East",
+                category: "Location",
+                content: "[CuchenCustomerService Automated Message] EAST CENTER 43 Romeo St, Moonachie, NJ 07074 For inquiries, please contact 888-742-2588.",
+                variables: []
+            },
+            {
+                id: 5,
+                name: "Request for Damaged Parts Photo",
+                category: "Documentation",
+                content: "[CuchenCustomerService Automated Message] Please send photos of the damaged part to cuchen@kwinternational.com. For inquiries, please contact 888-742-2588.",
+                variables: []
+            },
+            {
+                id: 6,
+                name: "Request for Purchase Receipt",
+                category: "Documentation",
+                content: "[CuchenCustomerService Automated Message] Please send a copy of the purchase receipt showing the purchase date, store name, and product name to cuchen@kwinternational.com. For inquiries: 888-742-2588 Free service is available only within 1 year from the date of purchase.",
+                variables: []
+            },
+            {
+                id: 7,
+                name: "Notice Due to Missed Call",
+                category: "Follow-up",
+                content: "[CuchenCustomerService Automated Message] We tried to contact you but were unable to reach you, so we are sending this message instead. Please contact us regarding an important matter that requires your confirmation. For inquiries: 888-742-2588",
+                variables: []
+            },
+            {
+                id: 8,
                 name: "Custom Message",
                 category: "Custom",
                 content: "{{customMessage}}",
@@ -255,21 +290,13 @@
                         .trim();
                     
                     // Special formatting for specific fields
-                    if (variable === 'customerName') displayName = 'Customer Name';
-                    if (variable === 'repairCost') displayName = 'Repair Cost ($)';
-                    if (variable === 'shippingCost') displayName = 'Shipping Cost ($)';
-                    if (variable === 'total') displayName = 'Total Amount ($)';
-                    if (variable === 'pickupShippingInstructions') displayName = 'Pickup/Shipping Instructions';
-                    if (variable === 'paymentMethods') displayName = 'Payment Methods';
+                    if (variable === 'repairCost') displayName = 'Repair Cost';
+                    if (variable === 'shippingFee') displayName = 'Shipping Fee';
                     
                     // Add helpful placeholders
                     let placeholder = `Enter ${displayName.toLowerCase()}`;
-                    if (variable === 'repairCost' || variable === 'shippingCost' || variable === 'total') {
+                    if (variable === 'repairCost' || variable === 'shippingFee') {
                         placeholder = 'e.g., 150.00';
-                    } else if (variable === 'pickupShippingInstructions') {
-                        placeholder = 'e.g., Ready for pickup at our Dallas location';
-                    } else if (variable === 'paymentMethods') {
-                        placeholder = 'e.g., Credit card, PayPal, or check';
                     }
                     
                     html += `
