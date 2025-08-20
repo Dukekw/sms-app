@@ -29,13 +29,13 @@
         }
     </style>
 </head>
-<body class="min-h-screen" style="background: linear-gradient(135deg, #ffe6b3 0%, #ffd699 100%);">
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
     <div class="container mx-auto px-4 py-8 max-w-6xl">
         <!-- Header -->
         <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
             <div class="flex justify-between items-center">
                 <div>
-                    <h1 class="text-3xl font-bold" style="color: #cc5200;">Cuchen SMS System</h1>
+                    <h1 class="text-3xl font-bold text-gray-800">Cuchen SMS System</h1>
                     <p class="text-gray-600 mt-2">Send repair updates and custom messages to customers</p>
                 </div>
                 <div class="flex items-center gap-4">
@@ -135,21 +135,21 @@
                 </div>     
             </div>
         </div>
-        <div class="mt-8 bg-white rounded-lg shadow-lg overflow-hidden border border-orange-100">
-    <div class="text-white p-4" style="background: linear-gradient(135deg, #ff6b35 0%, #ff8c42 100%);">
-        <div class="flex items-center justify-between">
-            <h2 class="text-xl font-semibold flex items-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
-                </svg>
-                Incoming Messages
-                <span id="unreadBadge" class="ml-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full hidden">0</span>
-            </h2>
-            <button onclick="fetchRealMessages()" class="px-3 py-1 text-sm bg-white rounded hover:bg-orange-50 transition-colors font-medium" style="color: #ff6b35;">
-                Refresh
-            </button>
-        </div>
-    </div>
+        <div class="mt-8 bg-white rounded-lg shadow-lg overflow-hidden">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white p-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-xl font-semibold flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"></path>
+                        </svg>
+                        Incoming Messages
+                        <span id="unreadBadge" class="ml-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full hidden">0</span>
+                    </h2>
+                    <button onclick="fetchRealMessages()" class="px-3 py-1 text-sm bg-white text-blue-600 rounded hover:bg-blue-50 transition-colors">
+                        Refresh
+                    </button>
+                </div>
+            </div>
             
             <div class="grid md:grid-cols-3 h-96">
                 <!-- Phone Numbers List -->
@@ -434,8 +434,7 @@
 
             if (selectedTemplate && phoneNumber && appPassword && allVariablesFilled) {
                 button.disabled = false;
-                button.className = 'w-full py-3 px-4 rounded-md font-medium transition-colors text-white hover:opacity-90';
-                button.style.backgroundColor = '#ff6b35';
+                button.className = 'w-full py-3 px-4 rounded-md font-medium transition-colors bg-blue-600 text-white hover:bg-blue-700';
             } else {
                 button.disabled = true;
                 button.className = 'w-full py-3 px-4 rounded-md font-medium transition-colors bg-gray-300 text-gray-500 cursor-not-allowed';
