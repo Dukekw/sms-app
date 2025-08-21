@@ -1,8 +1,19 @@
 {
   "version": 2,
+  "buildCommand": "npm install",
+  "installCommand": "npm install",
   "functions": {
     "api/send-sms.js": {
-      "maxDuration": 10
+      "maxDuration": 10,
+      "runtime": "nodejs18.x"
+    },
+    "api/webhook-incoming.js": {
+      "maxDuration": 10,
+      "runtime": "nodejs18.x"
+    },
+    "api/get-messages.js": {
+      "maxDuration": 10,
+      "runtime": "nodejs18.x"
     }
   },
   "rewrites": [
