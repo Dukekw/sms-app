@@ -113,7 +113,12 @@
 
                 <!-- Recent Messages -->
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h2 class="text-xl font-semibold mb-4">Recent Messages</h2>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold">Recent Messages</h2>
+                        <button onclick="updateRecentMessages()" class="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                            Refresh
+                        </button>
+                    </div>
                     <div id="recentMessages">
                         <p class="text-gray-500 italic">No messages sent yet</p>
                     </div>
@@ -121,7 +126,12 @@
 
                 <!-- Statistics -->
                 <div class="bg-white rounded-lg shadow-lg p-6">
-                    <h2 class="text-xl font-semibold mb-4">Statistics</h2>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold">Statistics</h2>
+                        <button onclick="updateStatistics()" class="px-3 py-1 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors">
+                            Refresh
+                        </button>
+                    </div>
                     <div class="grid grid-cols-2 gap-4 text-center">
                         <div>
                             <p class="text-2xl font-bold text-blue-600" id="totalSent">0</p>
