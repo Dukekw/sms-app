@@ -714,7 +714,8 @@ async function selectPhoneNumber(phone) {
     const password = document.getElementById('appPassword').value;
     if (password) {
         try {
-            await fetch('/api/mark-read', {
+            console.log('Marking messages as read for:', phone);
+            const response = await fetch('/api/mark-read', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -724,9 +725,13 @@ async function selectPhoneNumber(phone) {
                     phoneNumber: phone
                 })
             });
+            const result = await response.json();
+            console.log('Mark read result:', result);
         } catch (error) {
             console.error('Failed to mark messages as read in database:', error);
         }
+    } else {
+        console.log('No password available, skipping database update');
     }
     
     // Update displays

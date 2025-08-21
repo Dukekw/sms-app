@@ -1,29 +1,24 @@
-// api/mark-read.js - Mark messages as read in database
+// api/debug-messages.js - Debug endpoint to see raw message data
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
 
-  if (req.method !== 'POST') {
+  if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { password, phoneNumber } = req.body;
-
     // Check password
+    const { password } = req.query;
     const APP_PASSWORD = process.env.APP_PASSWORD;
     
     if (APP_PASSWORD && password !== APP_PASSWORD) {
       return res.status(401).json({ error: 'Invalid password' });
-    }
-
-    if (!phoneNumber) {
-      return res.status(400).json({ error: 'Phone number is required' });
     }
 
     // Get Supabase credentials
@@ -31,52 +26,46 @@ export default async function handler(req, res) {
     const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
-      console.error('Missing Supabase credentials');
       return res.status(500).json({ 
-        error: 'Database not configured',
-        success: false 
+        error: 'Database not configured'
       });
     }
 
-    // Update messages as read in Supabase
+    // Fetch raw messages from Supabase with all fields
     const supabaseResponse = await fetch(
-      `${SUPABASE_URL}/rest/v1/incoming_messages?from_number=eq.${phoneNumber}`,
+      `${SUPABASE_URL}/rest/v1/incoming_messages?order=timestamp.desc&limit=10`,
       {
-        method: 'PATCH',
+        method: 'GET',
         headers: {
           'apikey': SUPABASE_SERVICE_KEY,
           'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
-          read: true
-        })
+          'Content-Type': 'application/json'
+        }
       }
     );
 
     if (!supabaseResponse.ok) {
       const error = await supabaseResponse.text();
-      console.error('Supabase update error:', error);
       return res.status(500).json({ 
-        error: 'Failed to update read status',
-        success: false 
+        error: 'Failed to fetch messages',
+        details: error
       });
     }
 
-    console.log(`Successfully marked messages from ${phoneNumber} as read`);
-
+    const messages = await supabaseResponse.json();
+    
     res.status(200).json({
       success: true,
-      message: 'Messages marked as read',
-      phoneNumber: phoneNumber
+      rawMessages: messages,
+      count: messages.length,
+      timestamp: new Date().toISOString()
     });
 
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Debug error:', error);
     res.status(500).json({ 
-      error: 'Failed to update read status',
-      success: false
+      error: 'Debug failed',
+      details: error.message
     });
   }
 }

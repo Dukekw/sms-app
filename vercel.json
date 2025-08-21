@@ -16,6 +16,9 @@
     },
     "api/mark-read.js": {
       "maxDuration": 10
+    },
+    "api/debug-messages.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
@@ -38,6 +41,10 @@
     {
       "source": "/api/mark-read",
       "destination": "/api/mark-read.js"
+    },
+    {
+      "source": "/api/debug-messages",
+      "destination": "/api/debug-messages.js"
     },
     {
       "source": "/",
