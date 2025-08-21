@@ -3,14 +3,9 @@
   "version": "1.0.0",
   "description": "Cuchen SMS System",
   "scripts": {
-    "build": "npm install",
-    "vercel-build": "npm install"
+    "build": "npm install"
   },
   "dependencies": {
-    "twilio": "^4.19.0",
-    "@supabase/supabase-js": "^2.39.0"
-  },
-  "engines": {
-    "node": ">=18.0.0"
+    "twilio": "^4.19.0"
   }
 }
