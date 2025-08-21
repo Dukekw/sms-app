@@ -4,16 +4,13 @@
   "installCommand": "npm install",
   "functions": {
     "api/send-sms.js": {
-      "maxDuration": 10,
-      "runtime": "nodejs18.x"
+      "maxDuration": 10
     },
     "api/webhook-incoming.js": {
-      "maxDuration": 10,
-      "runtime": "nodejs18.x"
+      "maxDuration": 10
     },
     "api/get-messages.js": {
-      "maxDuration": 10,
-      "runtime": "nodejs18.x"
+      "maxDuration": 10
     }
   },
   "rewrites": [
