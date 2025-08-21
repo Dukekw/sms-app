@@ -1,35 +1,49 @@
-# SMS Sender App 📱
+# Cuchen SMS System 📱
 
-A secure, production-ready SMS sending application built with Twilio and deployed on Vercel. Features password protection, rate limiting, and beautiful UI.
+A complete two-way SMS communication system built with Twilio, Supabase, and deployed on Vercel. Send messages using pre-built templates and receive/manage incoming messages with a beautiful web interface.
 
-![SMS Sender App](https://img.shields.io/badge/Status-Production%20Ready-green)
+![SMS System](https://img.shields.io/badge/Status-Production%20Ready-green)
 ![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black)
 ![Twilio](https://img.shields.io/badge/Powered%20by-Twilio-red)
+![Supabase](https://img.shields.io/badge/Database-Supabase-green)
 
 ## 🚀 Features
 
-- **8 Pre-built Templates**: Appointment reminders, order confirmations, payment reminders, and more
-- **Dynamic Variables**: Personalize messages with template variables
-- **Security Features**:
-  - Password protection
-  - Rate limiting (per hour/day)
-  - Phone number whitelist (optional)
-  - Content filtering (optional)
-- **User Interface**:
-  - Live message preview
-  - Character/segment counter
-  - Recent messages history
-  - Daily statistics
-  - International phone number support
-- **Production Ready**:
-  - Error handling
-  - Input validation
-  - Audit logging
-  - CORS protection
+### 📤 Outgoing Messages
+- **8 Pre-built Templates**: Cuchen repair service templates including receipt confirmations, cost notices, location notices, and custom messages
+- **Dynamic Variables**: Personalize messages with customer names, costs, locations, etc.
+- **Live Preview**: See exactly how your message will look before sending
+- **Character/Segment Counter**: Track SMS length and costs
+
+### 📥 Incoming Messages  
+- **Real-time Message Reception**: Receive and store incoming SMS messages via Twilio webhooks
+- **Conversation View**: Organized by phone number with message history
+- **Quick Reply**: Respond directly from the web interface
+- **Message Status**: Track read/unread status
+- **Search & Filter**: Find conversations quickly
+
+### 🔒 Security Features
+- **Password Protection**: Secure access to the application
+- **Rate Limiting**: Per hour/day limits to prevent abuse
+- **Phone Number Whitelist**: Optional restriction to specific recipients
+- **Content Filtering**: Block messages containing prohibited words
+- **Audit Logging**: Track all message activity
+
+### 💾 Database Integration
+- **Supabase Backend**: Reliable cloud database for message storage
+- **Message History**: Persistent storage of all incoming messages
+- **Real-time Sync**: Messages appear instantly in the web interface
+
+### 🎨 User Interface
+- **Modern Design**: Clean, responsive interface built with Tailwind CSS
+- **Message Statistics**: Daily/total message counters
+- **International Support**: Handle phone numbers from multiple countries
+- **Mobile Friendly**: Works perfectly on all devices
 
 ## 📋 Prerequisites
 
 - [Twilio Account](https://www.twilio.com/try-twilio) (free trial available)
+- [Supabase Account](https://supabase.com) (free tier available)
 - [Vercel Account](https://vercel.com/signup) (free)
 - [GitHub Account](https://github.com/signup) (free)
 - [Node.js](https://nodejs.org/) installed locally (for testing)
@@ -45,15 +59,42 @@ git clone https://github.com/YOUR_USERNAME/sms-app.git
 cd sms-app
 ```
 
-### Step 2: Configure Twilio
+### Step 2: Set Up Supabase Database
+
+1. Sign up for [Supabase](https://supabase.com)
+2. Create a new project
+3. Go to SQL Editor and run this query to create the messages table:
+
+```sql
+CREATE TABLE incoming_messages (
+  id BIGSERIAL PRIMARY KEY,
+  from_number TEXT NOT NULL,
+  to_number TEXT NOT NULL,
+  message TEXT NOT NULL,
+  message_sid TEXT UNIQUE,
+  timestamp TIMESTAMPTZ DEFAULT NOW(),
+  read BOOLEAN DEFAULT FALSE
+);
+
+-- Add index for better performance
+CREATE INDEX idx_incoming_messages_from_number ON incoming_messages(from_number);
+CREATE INDEX idx_incoming_messages_timestamp ON incoming_messages(timestamp DESC);
+```
+
+4. Get your credentials from Settings → API:
+   - Project URL
+   - Service Role Key (not anon key!)
+
+### Step 3: Configure Twilio
 
 1. Sign up for [Twilio](https://www.twilio.com/try-twilio)
 2. Get your credentials from [Twilio Console](https://console.twilio.com):
    - Account SID
    - Auth Token
    - Phone Number
+3. **Important**: You'll configure the webhook URL after deployment
 
-### Step 3: Deploy to Vercel
+### Step 4: Deploy to Vercel
 
 #### Option A: Deploy with Vercel Button (Easiest)
 
@@ -73,27 +114,57 @@ vercel
 
 3. Follow the prompts to link your project
 
-### Step 4: Set Environment Variables
+### Step 5: Set Environment Variables
 
-In Vercel Dashboard or via CLI:
-
-```bash
-# Required
-vercel env add TWILIO_ACCOUNT_SID
-vercel env add TWILIO_AUTH_TOKEN  
-vercel env add TWILIO_PHONE_NUMBER
-vercel env add APP_PASSWORD
-
-# Optional (with defaults)
-vercel env add DAILY_SMS_LIMIT      # Default: 100
-vercel env add MAX_REQUESTS_PER_HOUR # Default: 10
-```
-
-### Step 5: Redeploy
+In Vercel Dashboard → Settings → Environment Variables:
 
 ```bash
-vercel --prod
+# Twilio Configuration (Required)
+TWILIO_ACCOUNT_SID=your_account_sid
+TWILIO_AUTH_TOKEN=your_auth_token
+TWILIO_PHONE_NUMBER=+1234567890
+
+# Supabase Configuration (Required)
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# App Security (Required)
+APP_PASSWORD=your_secure_password
+
+# Rate Limiting (Optional - with defaults)
+DAILY_SMS_LIMIT=100
+MAX_REQUESTS_PER_HOUR=10
+
+# Advanced Security (Optional)
+ALLOWED_NUMBERS=+1234567890,+0987654321
+ALLOWED_ORIGINS=https://yourdomain.com
+BLOCKED_WORDS=spam,casino,lottery
 ```
+
+**Important**: Use the **Service Role Key** from Supabase, not the anon key!
+
+### Step 6: Configure Twilio Webhook
+
+After deployment:
+
+1. Go to [Twilio Console](https://console.twilio.com)
+2. Navigate to Phone Numbers → Manage → Active numbers
+3. Click on your SMS-enabled phone number
+4. In the "Messaging" section, set:
+   - **A message comes in**: `https://your-app.vercel.app/api/webhook-incoming`
+   - **HTTP Method**: POST
+5. Save the configuration
+
+### Step 7: Test Your Setup
+
+1. **Test database connection**:
+   ```
+   https://your-app.vercel.app/api/test-supabase?password=YOUR_PASSWORD
+   ```
+
+2. **Send a test SMS** to your Twilio number
+3. **Check incoming messages** in your web app
+4. **Send an outgoing message** using the web interface
 
 ## 🔐 Security Configuration
 
@@ -115,12 +186,29 @@ vercel --prod
 
 ## 📱 Usage
 
+### Sending Messages
 1. **Open your app**: `https://your-app.vercel.app`
-2. **Select a template** from the dropdown
-3. **Enter recipient's phone number**
-4. **Fill in template variables**
-5. **Enter your password**
-6. **Click "Send SMS"**
+2. **Enter your password** (required for all operations)
+3. **Select a template** from the dropdown (Receipt Confirmation, Cost Notice, etc.)
+4. **Enter recipient's phone number** with country code
+5. **Fill in template variables** (cost, location, etc.)
+6. **Preview your message** in the right panel
+7. **Click "Send SMS"**
+
+### Managing Incoming Messages
+1. **View incoming messages** in the bottom panel
+2. **Click on a phone number** to see the conversation
+3. **Use quick reply** to respond directly
+4. **Search conversations** using the search box
+5. **Messages are automatically marked as read** when viewed
+
+### Available Templates
+- **Receipt Confirmation**: Automated confirmation of repair requests
+- **Cost Notice**: Repair cost and shipping fee notifications  
+- **Location Notices**: West/East center addresses for carry-in customers
+- **Documentation Requests**: Photo and receipt requests
+- **Follow-up Messages**: Missed call notifications
+- **Custom Message**: Write your own message
 
 ## 🧪 Local Development
 
@@ -164,11 +252,20 @@ vercel logs
 
 | Issue | Solution |
 |-------|----------|
+| "Database not configured" | Check `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in Vercel |
 | "Invalid password" | Check `APP_PASSWORD` in Vercel environment variables |
 | "Phone number not verified" | For trial accounts, verify number in Twilio Console |
 | "Rate limit exceeded" | Wait 1 hour or increase `MAX_REQUESTS_PER_HOUR` |
 | "Daily limit reached" | Wait until tomorrow or increase `DAILY_SMS_LIMIT` |
 | "Invalid phone number" | Use E.164 format: `+1234567890` |
+| "Incoming messages not showing" | Check Twilio webhook URL and Vercel function logs |
+| "Webhook not receiving messages" | Ensure webhook URL uses HTTPS and is publicly accessible |
+
+### Debug Endpoints
+
+- **Test Supabase**: `/api/test-supabase?password=YOUR_PASSWORD`
+- **Get Messages**: `/api/get-messages?password=YOUR_PASSWORD`
+- **Check Webhook**: Look for POST requests in Vercel function logs
 
 ### Debug Mode
 
@@ -177,17 +274,20 @@ Set `NODE_ENV=development` in environment variables for detailed error messages.
 ## 💰 Cost Estimation
 
 - **Vercel**: Free tier includes 100GB bandwidth, 100k function invocations/month
+- **Supabase**: Free tier includes 500MB database, 2GB bandwidth/month
 - **Twilio**: ~$0.0079 per SMS in US (varies by country)
-- **Example**: 100 SMS/day = ~$24/month
+- **Example**: 100 SMS/day = ~$24/month (Twilio only, other services free on basic usage)
 
 ## 📈 Scaling to Production
 
 1. **Upgrade Twilio Account**: Remove trial restrictions
-2. **Add Custom Domain**: In Vercel settings
-3. **Implement User Authentication**: Add login system
-4. **Add Database**: Store message history
-5. **Set Up Monitoring**: Add Sentry or similar
-6. **Implement Webhooks**: Track delivery status
+2. **Upgrade Supabase**: Increase database limits if needed
+3. **Add Custom Domain**: In Vercel settings
+4. **Implement User Authentication**: Add multi-user support
+5. **Set Up Monitoring**: Add Sentry or similar for error tracking
+6. **Add Message Analytics**: Track delivery rates and response times
+7. **Implement Message Templates Management**: Allow dynamic template creation
+8. **Add File Attachments**: Support for images and documents
 
 ## 🤝 Contributing
 
@@ -223,9 +323,12 @@ vercel --prod
 
 1. **Never commit `.env` files** - They contain sensitive credentials
 2. **Use strong passwords** - Your APP_PASSWORD protects against unauthorized use
-3. **Monitor usage** - Set up alerts in Twilio for unusual activity
-4. **Test with small limits** - Start with low DAILY_SMS_LIMIT
-5. **Verify recipients** - In trial mode, verify all recipient numbers
+3. **Use Service Role Key** - Not the anon key for Supabase (required for write access)
+4. **Monitor usage** - Set up alerts in Twilio and Supabase for unusual activity
+5. **Test with small limits** - Start with low DAILY_SMS_LIMIT
+6. **Verify recipients** - In trial mode, verify all recipient numbers in Twilio
+7. **Secure your webhook** - The webhook endpoint is public but validates Twilio requests
+8. **Backup your database** - Supabase provides automatic backups, but consider additional backups for critical data
 
 ## 🎉 Ready to Go!
 
@@ -235,6 +338,34 @@ Your SMS app is now ready for production use. Remember to:
 - ✅ Update regularly for security patches
 - ✅ Test thoroughly before increasing limits
 
+## 🏗️ Architecture
+
+```
+┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
+│   Web Browser   │    │   Vercel Edge    │    │    Supabase     │
+│                 │◄──►│                  │◄──►│    Database     │
+│  - Send SMS     │    │  - API Routes    │    │  - Messages     │
+│  - View Messages│    │  - Static Files  │    │  - History      │
+└─────────────────┘    └──────────────────┘    └─────────────────┘
+                                │
+                                ▼
+                       ┌──────────────────┐
+                       │      Twilio      │
+                       │                  │
+                       │  - Send SMS      │
+                       │  - Receive SMS   │
+                       │  - Webhooks      │
+                       └──────────────────┘
+```
+
+## 🔄 Message Flow
+
+### Outgoing Messages
+1. User fills form → Frontend validates → API processes → Twilio sends → Database logs
+
+### Incoming Messages  
+1. SMS received → Twilio webhook → API stores in database → Frontend displays
+
 ---
 
-Built with ❤️ using [Twilio](https://twilio.com) and [Vercel](https://vercel.com)
+Built with ❤️ using [Twilio](https://twilio.com), [Supabase](https://supabase.com), and [Vercel](https://vercel.com)

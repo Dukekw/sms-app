@@ -699,16 +699,35 @@ function updateIncomingMessages() {
 }
 
 // Select and display messages from a phone number
-function selectPhoneNumber(phone) {
+async function selectPhoneNumber(phone) {
     selectedPhoneNumber = phone;
     
-    // Mark messages as read
+    // Mark messages as read locally
     incomingMessages.forEach(msg => {
         if (msg.from === phone) {
             msg.read = true;
         }
     });
     localStorage.setItem('incomingMessages', JSON.stringify(incomingMessages));
+    
+    // Mark messages as read in database
+    const password = document.getElementById('appPassword').value;
+    if (password) {
+        try {
+            await fetch('/api/mark-read', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    password: password,
+                    phoneNumber: phone
+                })
+            });
+        } catch (error) {
+            console.error('Failed to mark messages as read in database:', error);
+        }
+    }
     
     // Update displays
     updateIncomingMessages();

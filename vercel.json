@@ -13,6 +13,9 @@
     },
     "api/test-supabase.js": {
       "maxDuration": 10
+    },
+    "api/mark-read.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
@@ -31,6 +34,10 @@
     {
       "source": "/api/test-supabase",
       "destination": "/api/test-supabase.js"
+    },
+    {
+      "source": "/api/mark-read",
+      "destination": "/api/mark-read.js"
     },
     {
       "source": "/",
