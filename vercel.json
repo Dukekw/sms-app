@@ -19,6 +19,9 @@
     },
     "api/debug-messages.js": {
       "maxDuration": 10
+    },
+    "api/get-sent-messages.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
@@ -45,6 +48,10 @@
     {
       "source": "/api/debug-messages",
       "destination": "/api/debug-messages.js"
+    },
+    {
+      "source": "/api/get-sent-messages",
+      "destination": "/api/get-sent-messages.js"
     },
     {
       "source": "/",

@@ -42,7 +42,7 @@ export default async function handler(req, res) {
     const updateUrl = `${SUPABASE_URL}/rest/v1/incoming_messages?from_number=eq.${encodeURIComponent(phoneNumber)}`;
     console.log('Update URL:', updateUrl);
     console.log('Update payload:', JSON.stringify({ read: true }));
-    
+
     const supabaseResponse = await fetch(updateUrl, {
       method: 'PATCH',
       headers: {
