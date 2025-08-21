@@ -1,7 +1,6 @@
 {
   "version": 2,
   "buildCommand": "npm install",
-  "installCommand": "npm install",
   "functions": {
     "api/send-sms.js": {
       "maxDuration": 10
@@ -15,27 +14,20 @@
   },
   "rewrites": [
     {
+      "source": "/api/webhook-incoming",
+      "destination": "/api/webhook-incoming.js"
+    },
+    {
+      "source": "/api/get-messages",
+      "destination": "/api/get-messages.js"
+    },
+    {
+      "source": "/api/send-sms",
+      "destination": "/api/send-sms.js"
+    },
+    {
       "source": "/",
       "destination": "/index.html"
-    }
-  ],
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
     }
   ]
 }
