@@ -2,7 +2,9 @@
 export default async function handler(req, res) {
   console.log('=== Incoming SMS Webhook Called ===');
   console.log('Method:', req.method);
+  console.log('Headers:', JSON.stringify(req.headers));
   console.log('Body:', JSON.stringify(req.body));
+  console.log('Query:', JSON.stringify(req.query));
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -38,6 +40,7 @@ export default async function handler(req, res) {
           to_number: To,
           message: Body,
           message_sid: MessageSid,
+          timestamp: new Date().toISOString(),
           read: false
         })
       }

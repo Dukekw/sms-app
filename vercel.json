@@ -10,6 +10,9 @@
     },
     "api/get-messages.js": {
       "maxDuration": 10
+    },
+    "api/test-supabase.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
@@ -24,6 +27,10 @@
     {
       "source": "/api/send-sms",
       "destination": "/api/send-sms.js"
+    },
+    {
+      "source": "/api/test-supabase",
+      "destination": "/api/test-supabase.js"
     },
     {
       "source": "/",
