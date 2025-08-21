@@ -17,7 +17,7 @@ export default async function handler(req, res) {
 
     // Check password
     const APP_PASSWORD = process.env.APP_PASSWORD;
-    
+
     if (APP_PASSWORD && password !== APP_PASSWORD) {
       return res.status(401).json({ error: 'Invalid password' });
     }
@@ -32,39 +32,46 @@ export default async function handler(req, res) {
 
     if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
       console.error('Missing Supabase credentials');
-      return res.status(500).json({ 
+      return res.status(500).json({
         error: 'Database not configured',
-        success: false 
+        success: false
       });
     }
 
     // Update messages as read in Supabase
-    const supabaseResponse = await fetch(
-      `${SUPABASE_URL}/rest/v1/incoming_messages?from_number=eq.${phoneNumber}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'apikey': SUPABASE_SERVICE_KEY,
-          'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=minimal'
-        },
-        body: JSON.stringify({
-          read: true
-        })
-      }
-    );
+    const updateUrl = `${SUPABASE_URL}/rest/v1/incoming_messages?from_number=eq.${encodeURIComponent(phoneNumber)}`;
+    console.log('Update URL:', updateUrl);
+    console.log('Update payload:', JSON.stringify({ read: true }));
+    
+    const supabaseResponse = await fetch(updateUrl, {
+      method: 'PATCH',
+      headers: {
+        'apikey': SUPABASE_SERVICE_KEY,
+        'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+        'Content-Type': 'application/json',
+        'Prefer': 'return=representation'
+      },
+      body: JSON.stringify({
+        read: true
+      })
+    });
+
+    console.log('Supabase response status:', supabaseResponse.status);
+    console.log('Supabase response headers:', Object.fromEntries(supabaseResponse.headers.entries()));
 
     if (!supabaseResponse.ok) {
       const error = await supabaseResponse.text();
       console.error('Supabase update error:', error);
-      return res.status(500).json({ 
+      return res.status(500).json({
         error: 'Failed to update read status',
-        success: false 
+        success: false,
+        details: error
       });
     }
 
-    console.log(`Successfully marked messages from ${phoneNumber} as read`);
+    const updateResult = await supabaseResponse.json();
+    console.log('Supabase update result:', updateResult);
+    console.log(`Successfully marked ${updateResult.length || 0} messages from ${phoneNumber} as read`);
 
     res.status(200).json({
       success: true,
@@ -74,7 +81,7 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Error:', error);
-    res.status(500).json({ 
+    res.status(500).json({
       error: 'Failed to update read status',
       success: false
     });
