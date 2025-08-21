@@ -1,17 +1,11 @@
-
 {
-  "name": "cuchen-sms-app",
+  "name": "cuchen-sms",
   "version": "1.0.0",
-  "description": "Cuchen SMS System with Vercel backend",
+  "description": "Cuchen SMS System",
   "scripts": {
-    "dev": "vercel dev",
-    "build": "echo 'No build step needed'",
-    "deploy": "vercel --prod"
+    "build": "npm install"
   },
   "dependencies": {
-    "@vercel/kv": "^1.0.1"
-  },
-  "engines": {
-    "node": "18.x"
+    "twilio": "^4.19.0"
   }
 }
