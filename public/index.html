@@ -297,76 +297,90 @@
             },
             {
                 id: 9,
+                name: "Repair Delay Notice",
+                category: "Repair Delay Notice",
+                content: "[CuchenCustomerService Automated Message] Due to a delay in the arrival of parts shipped from Korea, service is delayed. We will update you again once the repair schedule is confirmed. For inquiries, please contact 888-742-2588.",
+                variables: []
+            },
+            {
+                id: 10,
+                name: "Repair Progress Notice",
+                category: "Repair Delay Notice",
+                content: "[CuchenCustomerService Automated Message] Parts from Korea have arrived, and the repair is currently in progress. We will notify you once the repair is completed. For inquiries, please contact 888-742-2588.",
+                variables: []
+            },
+            {
+                id: 11,
                 name: "Notice Due to Missed Call",
                 category: "Follow-up",
                 content: "[CuchenCustomerService Automated Message] We tried to contact you but were unable to reach you, so we are sending this message instead. Please contact us regarding an important matter that requires your confirmation. For inquiries: 888-742-2588",
                 variables: []
             },
             {
-                id: 10,
+                id: 12,
                 name: "접수확인/안내",
                 category: "Korean - Initial Contact",
                 content: "[쿠첸고객센터] 발신 전용메시지 수리 접수가 완료되었습니다. 문의는 888-742-2588로 연락 바랍니다.",
                 variables: []
             },
             {
-                id: 11,
+                id: 13,
                 name: "비용 안내",
                 category: "Korean - Pricing",
-                content: "[쿠첸고객센터] 발신 전용메시지 A/S 총 예상 비용: ${{repairCost}} / 배송비 ${{shippingFee}} 문의는 888-742-2588로 연락 바랍니다.",
+                content: "[쿠첸고객센터] 발신 전용메시지 A/S 총 예상 비용: {{repairCost}}원 / 배송비 {{shippingFee}}원 문의는 888-742-2588로 연락 바랍니다.",
                 variables: ["repairCost", "shippingFee"]
             },
             {
-                id: 12,
+                id: 14,
                 name: "서비스센터 위치 안내 - West",
                 category: "Korean - Location",
                 content: "[쿠첸고객센터] 발신 전용메시지 WEST CENTER 10395 Slusher Dr. #2, Santa Fe Springs, CA 90670 문의는 888-742-2588로 연락 바랍니다.",
                 variables: []
             },
             {
-                id: 13,
+                id: 15,
                 name: "서비스센터 위치 안내 - East",
                 category: "Korean - Location",
                 content: "[쿠첸고객센터] 발신 전용메시지 EAST CENTER 43 Romeo St Moonachie, NJ 07074 문의는 888-742-2588로 연락 바랍니다.",
                 variables: []
             },
             {
-                id: 14,
+                id: 16,
                 name: "배송 안내",
                 category: "Korean - Shipping",
                 content: "[쿠첸고객센터] 발신 전용메시지 수리 완료 제품 발송 완료 운송장번호: {{trackingNumber}} 배송조회: www.ups.com",
                 variables: ["trackingNumber"]
             },
             {
-                id: 15,
+                id: 17,
                 name: "수리지연",
                 category: "Korean - Status Update",
                 content: "[쿠첸고객센터] 발신 전용메시지 한국 발송 자재 도착 지연으로 인해 서비스가 지연 됨을 다시 안내 드립니다. 수리 진행 시점이 확정되면 다시 안내드리겠습니다. 문의는 888-742-2588로 연락 바랍니다.",
                 variables: []
             },
             {
-                id: 16,
+                id: 18,
                 name: "수리시작",
                 category: "Korean - Status Update",
                 content: "[쿠첸고객센터] 발신 전용메시지 한국 발송 자재 도착 되어 수리가 진행중 입니다. 제품 수리가 완료되면 안내 드리겠습니다. 문의는 888-742-2588로 연락 바랍니다.",
                 variables: []
             },
             {
-                id: 17,
+                id: 19,
                 name: "추가자료 요청 - 사진",
                 category: "Korean - Documentation",
                 content: "[쿠첸고객센터] 발신 전용메시지 제품 파손 부위 사진을 cuchen@kwinternational.com 으로 보내주시기 바랍니다. 문의는 888-742-2588로 연락 바랍니다.",
                 variables: []
             },
             {
-                id: 18,
+                id: 20,
                 name: "추가 자료 요청 - 영수증",
                 category: "Korean - Documentation",
                 content: "[쿠첸고객센터] 발신 전용메시지 구입일, 매장명, 제품명이 모두 확인 가능한 구입 영수증 사진을 cuchen@kwinternational.com 으로 보내주시기 바랍니다. 문의: 888-742-2588 * 제품 구입일 기준 1년 이내만 무상 서비스가 가능합니다.",
                 variables: []
             },
             {
-                id: 19,
+                id: 21,
                 name: "부재중 안내",
                 category: "Korean - Follow-up",
                 content: "[쿠첸고객센터] 발신 전용메시지 고객님께 연락드렸으나 부재 중이셔서 문자로 안내드립니다. 확인이 필요한 사항이 있어 연락 부탁드립니다. 문의: 888-742-2588",
