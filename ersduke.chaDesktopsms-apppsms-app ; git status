@@ -1,0 +1,43 @@
+[33m2cd9d61[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Add refresh buttons for Recent Messages and Statistics sections
+[33mbf1af6f[m Replace localStorage recent messages with Twilio API data
+[33me339b7a[m Add detailed logging to mark-read API
+[33m0d8b56a[m Add debugging for read status updates
+[33mf96f41b[m Fix read status persistence: mark messages as read in database
+[33md871f8b[m[33m ([m[1;31morigin/fix-incoming-messages[m[33m, [m[1;32mfix-incoming-messages[m[33m)[m Fix environment variable name to match SUPABASE_SERVICE_ROLE_KEY
+[33m165b03c[m Fix incoming messages functionality
+[33m41a032b[m[33m ([m[1;31morigin/backup-working-version[m[33m, [m[1;32mbackup-working-version[m[33m)[m Update vercel.json
+[33mc2993fe[m Update get-messages.js
+[33m0d66d8f[m Update webhook-incoming.js
+[33ma22ab5f[m Update vercel.json
+[33m0ce2761[m Update vercel.json
+[33m9f4425d[m Update package.json
+[33m92fe900[m Update package.json
+[33m2c39fc9[m Update package.json
+[33m452034a[m Update index.html
+[33me267a4b[m Update index.html
+[33md6c7291[m Update get-messages.js
+[33mc450979[m Update webhook-incoming.js
+[33ma951ff5[m Delete index.html
+[33m72b8914[m Add files via upload
+[33m76317b6[m Update index.html
+[33m7265f81[m Create get-messages.js
+[33mf7f064b[m Create webhook-incoming.js
+[33m3e958ce[m Update package.json
+[33m9a0a9f9[m Update index.html
+[33m17e793f[m Update package.json
+[33m3c1a9a9[m Update package.json
+[33mad47586[m Add files via upload
+[33m0be3677[m Delete readme-md.md
+[33mc775d07[m Delete vercel-json.json
+[33m2b6e24e[m Delete package-json.json
+[33m2b8f2cb[m Update package-json.json
+[33m3631c9e[m Add files via upload
+[33m934a99b[m Delete api directory
+[33m7b1b47d[m Delete api-send-sms.js
+[33mcd7d639[m Add files via upload
+[33m5ee7e46[m Add files via upload
+[33me361d9d[m Delete complete-index-html (1).html
+[33mf42f351[m Add files via upload
+[33m129c1bc[m Delete complete-index-html.html
+[33m912b516[m Delete gitignore (1).txt
+[33mc64401e[m Add files via upload
