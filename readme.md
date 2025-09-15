@@ -1,52 +1,136 @@
-# Cuchen SMS System 📱
+<div align="center">
 
-A complete two-way SMS communication system built with Twilio, Supabase, and deployed on Vercel. Send messages using pre-built templates and receive/manage incoming messages with a beautiful web interface.
+# Cuchen SMS Management System
 
-![SMS System](https://img.shields.io/badge/Status-Production%20Ready-green)
-![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black)
-![Twilio](https://img.shields.io/badge/Powered%20by-Twilio-red)
-![Supabase](https://img.shields.io/badge/Database-Supabase-green)
+### Enterprise-Grade SMS Communication Platform
 
-## 🚀 Features
+*Professional two-way SMS communication system designed for customer service excellence*
 
-### 📤 Outgoing Messages
-- **8 Pre-built Templates**: Cuchen repair service templates including receipt confirmations, cost notices, location notices, and custom messages
-- **Dynamic Variables**: Personalize messages with customer names, costs, locations, etc.
-- **Live Preview**: See exactly how your message will look before sending
-- **Character/Segment Counter**: Track SMS length and costs
+---
 
-### 📥 Incoming Messages  
-- **Real-time Message Reception**: Receive and store incoming SMS messages via Twilio webhooks
-- **Conversation View**: Organized by phone number with message history
-- **Quick Reply**: Respond directly from the web interface
-- **Message Status**: Track read/unread status
-- **Search & Filter**: Find conversations quickly
+![Status](https://img.shields.io/badge/Status-Production%20Ready-000000?style=for-the-badge&logo=checkmarx&logoColor=white)
+![Version](https://img.shields.io/badge/Version-2.0-666666?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-000000?style=for-the-badge)
 
-### 🔒 Security Features
-- **Password Protection**: Secure access to the application
-- **Rate Limiting**: Per hour/day limits to prevent abuse
-- **Phone Number Whitelist**: Optional restriction to specific recipients
-- **Content Filtering**: Block messages containing prohibited words
-- **Audit Logging**: Track all message activity
+![Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
+![Twilio](https://img.shields.io/badge/Powered%20by-Twilio-666666?style=flat-square&logo=twilio&logoColor=white)
+![Supabase](https://img.shields.io/badge/Database-Supabase-000000?style=flat-square&logo=supabase&logoColor=white)
+![Node.js](https://img.shields.io/badge/Runtime-Node.js-666666?style=flat-square&logo=node.js&logoColor=white)
 
-### 💾 Database Integration
-- **Supabase Backend**: Reliable cloud database for message storage
-- **Message History**: Persistent storage of all incoming messages
-- **Real-time Sync**: Messages appear instantly in the web interface
+</div>
 
-### 🎨 User Interface
-- **Modern Design**: Clean, responsive interface built with Tailwind CSS
-- **Message Statistics**: Daily/total message counters
-- **International Support**: Handle phone numbers from multiple countries
-- **Mobile Friendly**: Works perfectly on all devices
+---
 
-## 📋 Prerequisites
+## Core Capabilities
 
-- [Twilio Account](https://www.twilio.com/try-twilio) (free trial available)
-- [Supabase Account](https://supabase.com) (free tier available)
-- [Vercel Account](https://vercel.com/signup) (free)
-- [GitHub Account](https://github.com/signup) (free)
-- [Node.js](https://nodejs.org/) installed locally (for testing)
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### **Message Management**
+```
+✓ 21 Professional Templates
+  • 11 English Templates
+  • 10 Korean Templates (한국어)
+  • Custom Message Creation
+  • Dynamic Variable Support
+
+✓ Advanced Message Features
+  • Real-time Preview
+  • Character/Segment Counter
+  • Multi-language Support
+  • Template Categorization
+```
+
+### **Communication Channels**
+```
+✓ Outbound Messaging
+  • Template-based Sending
+  • Bulk Message Support
+  • Delivery Confirmation
+  • Cost Tracking
+
+✓ Inbound Message Handling
+  • Real-time Reception
+  • Conversation Threading
+  • Quick Reply System
+  • Message Status Tracking
+```
+
+</td>
+<td width="50%" valign="top">
+
+### **Data & Analytics**
+```
+✓ Message Export System
+  • CSV Format (Excel Compatible)
+  • TXT Format (Human Readable)
+  • JSON Format (API Compatible)
+  • UTF-8 Korean Character Support
+
+✓ Advanced Filtering
+  • Date Range Selection
+  • Custom Time Periods
+  • Message Type Filtering
+  • Conversation Search
+```
+
+### **Security & Compliance**
+```
+✓ Enterprise Security
+  • Password Protection
+  • Rate Limiting Controls
+  • IP-based Restrictions
+  • Content Filtering
+
+✓ Audit & Monitoring
+  • Complete Message Logging
+  • Delivery Status Tracking
+  • Usage Analytics
+  • Error Reporting
+```
+
+</td>
+</tr>
+</table>
+
+---
+
+## System Architecture
+
+<div align="center">
+
+```mermaid
+graph TB
+    A[Web Interface] --> B[Vercel Edge Functions]
+    B --> C[Twilio SMS API]
+    B --> D[Supabase Database]
+    C --> E[Customer Phones]
+    E --> C
+    C --> F[Webhook Handler]
+    F --> D
+    
+    style A fill:#f9f9f9,stroke:#333,stroke-width:2px
+    style B fill:#000,stroke:#333,stroke-width:2px,color:#fff
+    style C fill:#666,stroke:#333,stroke-width:2px,color:#fff
+    style D fill:#f9f9f9,stroke:#333,stroke-width:2px
+```
+
+</div>
+
+## Prerequisites
+
+<div align="center">
+
+| Service | Requirement | Cost | Purpose |
+|---------|-------------|------|---------|
+| ![Twilio](https://img.shields.io/badge/-Twilio-000000?style=flat&logo=twilio&logoColor=white) | [Account Setup](https://www.twilio.com/try-twilio) | Free Trial Available | SMS Gateway |
+| ![Supabase](https://img.shields.io/badge/-Supabase-666666?style=flat&logo=supabase&logoColor=white) | [Database Account](https://supabase.com) | Free Tier Available | Message Storage |
+| ![Vercel](https://img.shields.io/badge/-Vercel-000000?style=flat&logo=vercel&logoColor=white) | [Hosting Account](https://vercel.com/signup) | Free Tier Available | Application Hosting |
+| ![GitHub](https://img.shields.io/badge/-GitHub-666666?style=flat&logo=github&logoColor=white) | [Repository Access](https://github.com/signup) | Free | Code Management |
+| ![Node.js](https://img.shields.io/badge/-Node.js-000000?style=flat&logo=node.js&logoColor=white) | [Local Installation](https://nodejs.org/) | Free | Development Environment |
+
+</div>
 
 ## 🛠️ Quick Setup
 
@@ -202,13 +286,54 @@ After deployment:
 4. **Search conversations** using the search box
 5. **Messages are automatically marked as read** when viewed
 
-### Available Templates
-- **Receipt Confirmation**: Automated confirmation of repair requests
-- **Cost Notice**: Repair cost and shipping fee notifications  
-- **Location Notices**: West/East center addresses for carry-in customers
-- **Documentation Requests**: Photo and receipt requests
-- **Follow-up Messages**: Missed call notifications
-- **Custom Message**: Write your own message
+### Available Message Templates
+
+<details>
+<summary><strong>📋 English Templates (11 Available)</strong></summary>
+
+| ID | Template Name | Category | Variables |
+|----|---------------|----------|-----------|
+| 1 | Custom Message | Custom | `customMessage` |
+| 2 | Receipt Confirmation | Initial Contact | None |
+| 3 | Cost Notice | Pricing | `repairCost`, `shippingFee` |
+| 4 | Location Notice - West | Location | None |
+| 5 | Location Notice - East | Location | None |
+| 6 | Shipping Notice | Shipping | `trackingNumber` |
+| 7 | Photo Request | Documentation | None |
+| 8 | Receipt Request | Documentation | None |
+| 9 | Repair Delay Notice | Repair Status | None |
+| 10 | Repair Progress Notice | Repair Status | None |
+| 11 | Missed Call Notice | Follow-up | None |
+
+</details>
+
+<details>
+<summary><strong>🇰🇷 Korean Templates (10 Available)</strong></summary>
+
+| ID | Template Name | Category | Variables |
+|----|---------------|----------|-----------|
+| 12 | 접수확인/안내 | Korean - Initial Contact | None |
+| 13 | 비용 안내 | Korean - Pricing | `repairCost`, `shippingFee` |
+| 14 | 서비스센터 위치 안내 - West | Korean - Location | None |
+| 15 | 서비스센터 위치 안내 - East | Korean - Location | None |
+| 16 | 배송 안내 | Korean - Shipping | `trackingNumber` |
+| 17 | 수리지연 | Korean - Status Update | None |
+| 18 | 수리시작 | Korean - Status Update | None |
+| 19 | 추가자료 요청 - 사진 | Korean - Documentation | None |
+| 20 | 추가 자료 요청 - 영수증 | Korean - Documentation | None |
+| 21 | 부재중 안내 | Korean - Follow-up | None |
+
+</details>
+
+### **📥 Enhanced Download System**
+
+The system now includes a comprehensive message export feature:
+
+- **Multiple Formats**: CSV (Excel), TXT (Human-readable), JSON (API-compatible)
+- **Time Range Selection**: Today, Yesterday, Last 7/30/90 days, Custom range
+- **UTF-8 Support**: Perfect Korean character rendering in all formats
+- **Smart Filtering**: Export only messages within selected timeframes
+- **Professional Output**: Properly formatted files for business use
 
 ## 🧪 Local Development
 
@@ -246,20 +371,53 @@ vercel logs
 - [Twilio Console](https://console.twilio.com)
 - Monitor → Logs → Messages
 
-## 🚨 Troubleshooting
+## Troubleshooting Guide
 
-### Common Issues
+<details>
+<summary><strong>🔧 Common Issues & Solutions</strong></summary>
 
-| Issue | Solution |
-|-------|----------|
-| "Database not configured" | Check `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` in Vercel |
-| "Invalid password" | Check `APP_PASSWORD` in Vercel environment variables |
-| "Phone number not verified" | For trial accounts, verify number in Twilio Console |
-| "Rate limit exceeded" | Wait 1 hour or increase `MAX_REQUESTS_PER_HOUR` |
-| "Daily limit reached" | Wait until tomorrow or increase `DAILY_SMS_LIMIT` |
-| "Invalid phone number" | Use E.164 format: `+1234567890` |
-| "Incoming messages not showing" | Check Twilio webhook URL and Vercel function logs |
-| "Webhook not receiving messages" | Ensure webhook URL uses HTTPS and is publicly accessible |
+### **Configuration Issues**
+
+| Issue | Root Cause | Solution |
+|-------|------------|----------|
+| `Database not configured` | Missing Supabase credentials | Verify `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` |
+| `Invalid password` | Incorrect app password | Check `APP_PASSWORD` in environment variables |
+| `Twilio authentication failed` | Wrong API credentials | Verify `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` |
+
+### **Message Delivery Issues**
+
+| Issue | Root Cause | Solution |
+|-------|------------|----------|
+| `Phone number not verified` | Trial account limitation | Verify recipient numbers in Twilio Console |
+| `Rate limit exceeded` | Too many requests | Wait 1 hour or increase `MAX_REQUESTS_PER_HOUR` |
+| `Daily limit reached` | Exceeded daily quota | Wait until tomorrow or increase `DAILY_SMS_LIMIT` |
+| `Invalid phone number` | Wrong format | Use E.164 format: `+1234567890` |
+
+### **Korean Character Issues**
+
+| Issue | Root Cause | Solution |
+|-------|------------|----------|
+| `Korean text shows as ????` | Encoding problem | System automatically handles UTF-8 encoding |
+| `Download files corrupted` | Missing BOM | System adds UTF-8 BOM automatically |
+| `Excel shows garbled text` | Wrong charset | Use CSV format with UTF-8 BOM support |
+
+</details>
+
+### **Debug Endpoints**
+
+```bash
+# Test database connection
+GET /api/test-supabase?password=YOUR_PASSWORD
+
+# Retrieve message history  
+GET /api/get-messages?password=YOUR_PASSWORD
+
+# Check sent messages
+GET /api/get-sent-messages?password=YOUR_PASSWORD&limit=50
+
+# Debug webhook functionality
+POST /api/webhook-incoming (Twilio webhook)
+```
 
 ### Debug Endpoints
 
@@ -271,12 +429,35 @@ vercel logs
 
 Set `NODE_ENV=development` in environment variables for detailed error messages.
 
-## 💰 Cost Estimation
+## Cost Analysis
 
-- **Vercel**: Free tier includes 100GB bandwidth, 100k function invocations/month
-- **Supabase**: Free tier includes 500MB database, 2GB bandwidth/month
-- **Twilio**: ~$0.0079 per SMS in US (varies by country)
-- **Example**: 100 SMS/day = ~$24/month (Twilio only, other services free on basic usage)
+<div align="center">
+
+### **Monthly Operating Costs**
+
+| Service | Free Tier | Paid Tier | Usage Example |
+|---------|-----------|-----------|---------------|
+| **Vercel** | 100GB bandwidth<br/>100k function calls | $20/month Pro | Hosting & API |
+| **Supabase** | 500MB database<br/>2GB bandwidth | $25/month Pro | Message storage |
+| **Twilio** | Trial credits | ~$0.0079 per SMS | 100 SMS/day ≈ $24/month |
+
+### **Scaling Examples**
+
+```
+📊 Small Business (50 SMS/day)
+   Vercel: Free | Supabase: Free | Twilio: ~$12/month
+   Total: ~$12/month
+
+📊 Medium Business (200 SMS/day)  
+   Vercel: Free | Supabase: Free | Twilio: ~$48/month
+   Total: ~$48/month
+
+📊 Enterprise (1000 SMS/day)
+   Vercel: $20 | Supabase: $25 | Twilio: ~$240/month
+   Total: ~$285/month
+```
+
+</div>
 
 ## 📈 Scaling to Production
 
@@ -289,15 +470,56 @@ Set `NODE_ENV=development` in environment variables for detailed error messages.
 7. **Implement Message Templates Management**: Allow dynamic template creation
 8. **Add File Attachments**: Support for images and documents
 
-## 🤝 Contributing
+## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+<div align="center">
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### **Development Workflow**
+
+```mermaid
+gitGraph
+    commit id: "Main Branch"
+    branch feature/new-feature
+    checkout feature/new-feature
+    commit id: "Implement Feature"
+    commit id: "Add Tests"
+    commit id: "Update Docs"
+    checkout main
+    merge feature/new-feature
+    commit id: "Release"
+```
+
+</div>
+
+### **Contribution Guidelines**
+
+1. **Fork & Clone**
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/sms-app.git
+   cd sms-app
+   ```
+
+2. **Create Feature Branch**
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+
+3. **Development Standards**
+   - Follow existing code style
+   - Add comprehensive comments
+   - Test all functionality
+   - Update documentation
+
+4. **Commit & Push**
+   ```bash
+   git commit -m "feat: add amazing feature"
+   git push origin feature/amazing-feature
+   ```
+
+5. **Submit Pull Request**
+   - Provide detailed description
+   - Include screenshots if UI changes
+   - Reference any related issues
 
 ## 📄 License
 
@@ -368,4 +590,28 @@ Your SMS app is now ready for production use. Remember to:
 
 ---
 
-Built with ❤️ using [Twilio](https://twilio.com), [Supabase](https://supabase.com), and [Vercel](https://vercel.com)
+<div align="center">
+
+### **Technology Stack**
+
+![Twilio](https://img.shields.io/badge/-Twilio-000000?style=for-the-badge&logo=twilio&logoColor=white)
+![Supabase](https://img.shields.io/badge/-Supabase-666666?style=for-the-badge&logo=supabase&logoColor=white)
+![Vercel](https://img.shields.io/badge/-Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![JavaScript](https://img.shields.io/badge/-JavaScript-666666?style=for-the-badge&logo=javascript&logoColor=white)
+![Node.js](https://img.shields.io/badge/-Node.js-000000?style=for-the-badge&logo=node.js&logoColor=white)
+
+### **Version History**
+
+| Version | Release Date | Key Features |
+|---------|--------------|--------------|
+| **v2.0** | 2024-12 | Enhanced download system, Korean UTF-8 support, 21 templates |
+| **v1.0** | 2024-11 | Initial release, basic SMS functionality, template system |
+
+---
+
+**© 2024 Cuchen SMS Management System**  
+*Professional SMS Communication Platform*
+
+Built with precision using enterprise-grade technologies
+
+</div>
