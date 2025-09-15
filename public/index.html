@@ -253,11 +253,12 @@
     <div id="downloadModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
         <div class="bg-white rounded-lg p-6 w-96 max-w-90vw">
             <h3 class="text-lg font-semibold mb-4">Download Messages</h3>
-            
+
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Time Frame</label>
-                    <select id="downloadTimeFrame" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="downloadTimeFrame"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="today">Today</option>
                         <option value="yesterday">Yesterday</option>
                         <option value="last7days">Last 7 Days</option>
@@ -270,17 +271,20 @@
                 <div id="customDateRange" class="hidden space-y-2">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">From Date</label>
-                        <input type="date" id="fromDate" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="date" id="fromDate"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">To Date</label>
-                        <input type="date" id="toDate" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="date" id="toDate"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">Download Format</label>
-                    <select id="downloadFormat" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <select id="downloadFormat"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         <option value="csv">CSV (Excel Compatible)</option>
                         <option value="txt">Text File</option>
                         <option value="json">JSON</option>
@@ -289,10 +293,12 @@
             </div>
 
             <div class="flex justify-end gap-3 mt-6">
-                <button onclick="closeDownloadModal()" class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
+                <button onclick="closeDownloadModal()"
+                    class="px-4 py-2 text-gray-600 border border-gray-300 rounded-md hover:bg-gray-50 transition-colors">
                     Cancel
                 </button>
-                <button onclick="downloadMessages()" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
+                <button onclick="downloadMessages()"
+                    class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
                     Download
                 </button>
             </div>
@@ -1174,14 +1180,14 @@
                 showNotification('Please enter the password first', 'error');
                 return;
             }
-            
+
             document.getElementById('downloadModal').classList.remove('hidden');
-            
+
             // Set default dates
             const today = new Date();
             const yesterday = new Date(today);
             yesterday.setDate(yesterday.getDate() - 1);
-            
+
             document.getElementById('toDate').value = today.toISOString().split('T')[0];
             document.getElementById('fromDate').value = yesterday.toISOString().split('T')[0];
         }
@@ -1191,12 +1197,12 @@
         }
 
         // Handle time frame selection
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const timeFrameSelect = document.getElementById('downloadTimeFrame');
             const customDateRange = document.getElementById('customDateRange');
-            
+
             if (timeFrameSelect) {
-                timeFrameSelect.addEventListener('change', function() {
+                timeFrameSelect.addEventListener('change', function () {
                     if (this.value === 'custom') {
                         customDateRange.classList.remove('hidden');
                     } else {
@@ -1211,7 +1217,7 @@
             const password = document.getElementById('appPassword').value;
             const timeFrame = document.getElementById('downloadTimeFrame').value;
             const format = document.getElementById('downloadFormat').value;
-            
+
             if (!password) {
                 showNotification('Please enter the password first', 'error');
                 return;
@@ -1220,7 +1226,7 @@
             // Calculate date range
             let fromDate, toDate;
             const today = new Date();
-            
+
             switch (timeFrame) {
                 case 'today':
                     fromDate = new Date(today);
@@ -1260,12 +1266,12 @@
                 case 'custom':
                     const fromInput = document.getElementById('fromDate').value;
                     const toInput = document.getElementById('toDate').value;
-                    
+
                     if (!fromInput || !toInput) {
                         showNotification('Please select both from and to dates', 'error');
                         return;
                     }
-                    
+
                     fromDate = new Date(fromInput);
                     fromDate.setHours(0, 0, 0, 0);
                     toDate = new Date(toInput);
@@ -1309,24 +1315,28 @@
 
                 // Generate file content based on format
                 let content, mimeType;
-                
+
                 switch (format) {
                     case 'csv':
                         content = generateCSV(filteredMessages);
-                        mimeType = 'text/csv';
+                        mimeType = 'text/csv;charset=utf-8';
                         break;
                     case 'txt':
                         content = generateTXT(filteredMessages);
-                        mimeType = 'text/plain';
+                        mimeType = 'text/plain;charset=utf-8';
                         break;
                     case 'json':
                         content = JSON.stringify(filteredMessages, null, 2);
-                        mimeType = 'application/json';
+                        mimeType = 'application/json;charset=utf-8';
                         break;
                 }
 
-                // Download file
-                const blob = new Blob([content], { type: mimeType });
+                // Add UTF-8 BOM for proper Korean character support
+                const BOM = '\uFEFF';
+                const contentWithBOM = BOM + content;
+
+                // Download file with proper UTF-8 encoding
+                const blob = new Blob([contentWithBOM], { type: mimeType });
                 const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
@@ -1350,33 +1360,34 @@
             }
         }
 
-        // Generate CSV content
+        // Generate CSV content with proper Korean character handling
         function generateCSV(messages) {
             const headers = ['Date', 'Time', 'To', 'Message', 'Status', 'Price'];
             let csv = headers.join(',') + '\n';
-            
+
             messages.forEach(msg => {
                 const date = new Date(msg.timestamp);
-                const dateStr = date.toLocaleDateString();
-                const timeStr = date.toLocaleTimeString();
+                const dateStr = `"${date.toLocaleDateString()}"`;
+                const timeStr = `"${date.toLocaleTimeString()}"`;
+                // Properly escape quotes and handle Korean characters
                 const message = `"${msg.message.replace(/"/g, '""')}"`;
-                const to = msg.to;
-                const status = msg.status || 'unknown';
-                const price = msg.price || '';
-                
+                const to = `"${msg.to}"`;
+                const status = `"${msg.status || 'unknown'}"`;
+                const price = `"${msg.price || ''}"`;
+
                 csv += `${dateStr},${timeStr},${to},${message},${status},${price}\n`;
             });
-            
+
             return csv;
         }
 
-        // Generate TXT content
+        // Generate TXT content with proper Korean character handling
         function generateTXT(messages) {
             let txt = `SMS Messages Export\n`;
             txt += `Generated: ${new Date().toLocaleString()}\n`;
             txt += `Total Messages: ${messages.length}\n`;
             txt += `${'='.repeat(50)}\n\n`;
-            
+
             messages.forEach((msg, index) => {
                 const date = new Date(msg.timestamp);
                 txt += `Message #${index + 1}\n`;
@@ -1387,7 +1398,7 @@
                 txt += `Message:\n${msg.message}\n`;
                 txt += `${'-'.repeat(30)}\n\n`;
             });
-            
+
             return txt;
         }
     </script>
