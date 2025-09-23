@@ -28,6 +28,12 @@
     },
     "api/migrate-historical-messages.js": {
       "maxDuration": 30
+    },
+    "api/sync-message-status.js": {
+      "maxDuration": 20
+    },
+    "api/webhook-status-update.js": {
+      "maxDuration": 10
     }
   },
   "rewrites": [
@@ -66,6 +72,14 @@
     {
       "source": "/api/migrate-historical-messages",
       "destination": "/api/migrate-historical-messages.js"
+    },
+    {
+      "source": "/api/sync-message-status",
+      "destination": "/api/sync-message-status.js"
+    },
+    {
+      "source": "/api/webhook-status-update",
+      "destination": "/api/webhook-status-update.js"
     },
     {
       "source": "/",

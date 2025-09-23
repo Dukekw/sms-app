@@ -160,7 +160,8 @@ export default async function handler(req, res) {
     const result = await client.messages.create({
       body: message,
       from: fromNumber,
-      to: to
+      to: to,
+      statusCallback: `${req.headers.origin || 'https://' + req.headers.host}/api/webhook-status-update`
     });
 
     // ====== SAVE TO SUPABASE DATABASE ======
