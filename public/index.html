@@ -1223,6 +1223,15 @@
                 return;
             }
 
+            // Get button reference early and store original text
+            const downloadBtn = document.querySelector('#downloadModal button[onclick="downloadMessages()"]');
+            if (!downloadBtn) {
+                showNotification('Download button not found', 'error');
+                return;
+            }
+            
+            const originalText = downloadBtn.textContent;
+
             // Calculate date range
             let fromDate, toDate;
             const today = new Date();
@@ -1280,9 +1289,7 @@
             }
 
             try {
-                // Show loading
-                const downloadBtn = document.querySelector('#downloadModal button[onclick="downloadMessages()"]');
-                const originalText = downloadBtn.textContent;
+                // Show loading state
                 downloadBtn.textContent = 'Downloading...';
                 downloadBtn.disabled = true;
 
@@ -1306,6 +1313,9 @@
 
                 if (filteredMessages.length === 0) {
                     showNotification('No messages found in the selected time range', 'error');
+                    // Reset button state before returning
+                    downloadBtn.textContent = originalText;
+                    downloadBtn.disabled = false;
                     return;
                 }
 
@@ -1353,10 +1363,11 @@
                 console.error('Download error:', error);
                 showNotification(error.message || 'Failed to download messages', 'error');
             } finally {
-                // Reset button
-                const downloadBtn = document.querySelector('#downloadModal button[onclick="downloadMessages()"]');
-                downloadBtn.textContent = originalText;
-                downloadBtn.disabled = false;
+                // Reset button state
+                if (downloadBtn) {
+                    downloadBtn.textContent = originalText;
+                    downloadBtn.disabled = false;
+                }
             }
         }
 
