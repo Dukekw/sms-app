@@ -163,6 +163,54 @@ export default async function handler(req, res) {
       to: to
     });
 
+    // ====== SAVE TO SUPABASE DATABASE ======
+    try {
+      const SUPABASE_URL = process.env.SUPABASE_URL;
+      const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+      if (SUPABASE_URL && SUPABASE_SERVICE_KEY) {
+        const supabaseData = {
+          "From": fromNumber,
+          "To": to,
+          "Body": message,
+          "Status": result.status,
+          "SentDate": result.dateSent ? result.dateSent.toISOString() : new Date().toISOString(),
+          "ApiVersion": result.apiVersion || '2010-04-01',
+          "NumSegments": result.numSegments || 1,
+          "ErrorCode": result.errorCode || null,
+          "AccountSid": accountSid,
+          "Sid": result.sid,
+          "Direction": result.direction || 'outbound-api',
+          "Price": result.price || null,
+          "PriceUnit": result.priceUnit || 'USD',
+          "ShortenedLinkEnabled": false,
+          "ShortenedLinkFirstClicked": null
+        };
+
+        const supabaseResponse = await fetch(`${SUPABASE_URL}/rest/v1/sent_messages`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_SERVICE_KEY,
+            'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(supabaseData)
+        });
+
+        if (supabaseResponse.ok) {
+          console.log('Message saved to Supabase successfully:', result.sid);
+        } else {
+          const error = await supabaseResponse.text();
+          console.error('Failed to save message to Supabase:', error);
+          // Don't fail the request if Supabase save fails - message was still sent
+        }
+      }
+    } catch (supabaseError) {
+      console.error('Supabase save error:', supabaseError);
+      // Don't fail the request if Supabase save fails - message was still sent
+    }
+
     // Update rate limiting
     global.rateLimits[clientIp].push(now);
     

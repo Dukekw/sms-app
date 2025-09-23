@@ -1,4 +1,4 @@
-// api/get-sent-messages.js - Get sent messages from Twilio
+// api/get-sent-messages.js - Get sent messages from Supabase database
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
@@ -21,52 +21,63 @@ export default async function handler(req, res) {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    // Get Twilio credentials
-    const accountSid = process.env.TWILIO_ACCOUNT_SID;
-    const authToken = process.env.TWILIO_AUTH_TOKEN;
-    const fromNumber = process.env.TWILIO_PHONE_NUMBER;
+    // Get Supabase credentials
+    const SUPABASE_URL = process.env.SUPABASE_URL;
+    const SUPABASE_SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-    if (!accountSid || !authToken || !fromNumber) {
-      console.error('Missing Twilio credentials');
+    if (!SUPABASE_URL || !SUPABASE_SERVICE_KEY) {
+      console.error('Missing Supabase credentials');
       return res.status(500).json({ 
-        error: 'Twilio not configured',
+        error: 'Database not configured',
         success: false 
       });
     }
 
-    // Import Twilio SDK
-    const twilio = await import('twilio');
-    const client = twilio.default(accountSid, authToken);
-
-    // Fetch sent messages from Twilio
-    const messages = await client.messages.list({
-      from: fromNumber,
-      limit: parseInt(limit),
-      // Get messages from the last 30 days
-      dateSentAfter: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000)
+    // Fetch sent messages from Supabase
+    const supabaseUrl = `${SUPABASE_URL}/rest/v1/sent_messages?select=*&order=SentDate.desc,created_at.desc&limit=${parseInt(limit)}`;
+    
+    const supabaseResponse = await fetch(supabaseUrl, {
+      method: 'GET',
+      headers: {
+        'apikey': SUPABASE_SERVICE_KEY,
+        'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+        'Content-Type': 'application/json'
+      }
     });
 
-    // Transform to match frontend format
+    if (!supabaseResponse.ok) {
+      const error = await supabaseResponse.text();
+      console.error('Supabase fetch error:', error);
+      return res.status(500).json({ 
+        error: 'Failed to fetch sent messages from database',
+        success: false,
+        details: error
+      });
+    }
+
+    const messages = await supabaseResponse.json();
+
+    // Transform to match frontend format (keeping compatibility)
     const formattedMessages = messages.map(msg => ({
-      id: msg.sid,
-      to: msg.to,
-      message: msg.body,
-      status: msg.status,
-      timestamp: msg.dateSent ? msg.dateSent.toISOString() : new Date().toISOString(),
-      direction: msg.direction,
-      errorCode: msg.errorCode,
-      errorMessage: msg.errorMessage,
-      price: msg.price,
-      priceUnit: msg.priceUnit
+      id: msg.Sid,
+      to: msg.To,
+      message: msg.Body,
+      status: msg.Status,
+      timestamp: msg.SentDate || msg.created_at,
+      direction: msg.Direction,
+      errorCode: msg.ErrorCode,
+      errorMessage: null, // Not stored in our table
+      price: msg.Price,
+      priceUnit: msg.PriceUnit
     }));
 
-    console.log(`Fetched ${formattedMessages.length} sent messages from Twilio`);
+    console.log(`Fetched ${formattedMessages.length} sent messages from Supabase`);
 
     res.status(200).json({
       success: true,
       messages: formattedMessages,
       count: formattedMessages.length,
-      fromNumber: fromNumber
+      source: 'supabase'
     });
 
   } catch (error) {

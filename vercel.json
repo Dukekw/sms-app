@@ -22,6 +22,9 @@
     },
     "api/get-sent-messages.js": {
       "maxDuration": 10
+    },
+    "api/verify-sent-messages.js": {
+      "maxDuration": 15
     }
   },
   "rewrites": [
@@ -52,6 +55,10 @@
     {
       "source": "/api/get-sent-messages",
       "destination": "/api/get-sent-messages.js"
+    },
+    {
+      "source": "/api/verify-sent-messages",
+      "destination": "/api/verify-sent-messages.js"
     },
     {
       "source": "/",
