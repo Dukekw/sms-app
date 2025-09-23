@@ -25,6 +25,9 @@
     },
     "api/verify-sent-messages.js": {
       "maxDuration": 15
+    },
+    "api/migrate-historical-messages.js": {
+      "maxDuration": 30
     }
   },
   "rewrites": [
@@ -59,6 +62,10 @@
     {
       "source": "/api/verify-sent-messages",
       "destination": "/api/verify-sent-messages.js"
+    },
+    {
+      "source": "/api/migrate-historical-messages",
+      "destination": "/api/migrate-historical-messages.js"
     },
     {
       "source": "/",
